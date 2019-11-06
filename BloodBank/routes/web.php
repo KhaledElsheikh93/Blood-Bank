@@ -11,14 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::group(['middleware' => 'auth'] , function(){
+    
+Route::get('/', 'HomeController@index')->name('home');
+});
+
+Route::get('/hash', function () {
+    return Illuminate\Support\Facades\Hash::make(11111111) ;
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('governorates', 'GovernorateController');
+Route::resource('cities', 'CityController');
+Route::resource('blood_types', 'BloodTypeController');
+Route::resource('donation_requests', 'DonationRequestController');
+Route::resource('categories','CategoryController');
+Route::resource('posts','PostController');
+Route::resource('clients', 'ClientController');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

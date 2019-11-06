@@ -26,7 +26,7 @@ class Client extends Authenticatable
         return $this->belongsToMany('App\Models\BloodType');
     }
 
-    public function cities()
+    public function city()
     {
         return $this->belongsTo('App\Models\City');
     }
