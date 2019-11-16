@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{{ asset('adminlte/css/mystyle.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -81,6 +83,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset('adminlte/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <p style="color:white">{{ auth()->user()->name }}</p>
         </div>
        
       </div>
@@ -90,9 +93,23 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item">
+          <li class="nav-item">
+            <a href="{{ url(route('users.index'))}}" class="nav-link">
+              <i class="	fas fa-user-circle"></i>
+              <p>Users</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url(route('roles.index'))}}" class="nav-link">
+              <i class="fas fa-atlas"></i>
+              <p>Roles</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ url(route('clients.index'))}}" class="nav-link">
-              <i class="nav-icon fas fa-notes-medical text-danger"></i>
+              <i class="fas fa-user-friends"></i>
               <p>Clients</p>
             </a>
           </li>
@@ -160,13 +177,26 @@
           </li>
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url(route('settings.index')) }}" class="nav-link">
               <i class="nav-icon nav-icon fas fa-briefcase"></i>
               <p>Settings</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ url(route('contacts.index')) }}" class="nav-link">
+              <i class="	fas fa-address-card"></i>
+              <p>Contacts</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url(route('change_password.form')) }}" class="nav-link">
+              <i class="	fas fa-address-card"></i>
+              <p>Change password</p>
+            </a>
+          </li>
           
-    
           <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="https://adminlte.io/docs/3.0" class="nav-link">
@@ -238,5 +268,7 @@
 <script src="{{  asset('adminlte/js/demo.js')  }}"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+@stack('scripts')
 </body>
 </html>

@@ -10,6 +10,8 @@
 
 @inject('cities', 'App\Models\City')
 
+@inject('users', 'App\User')
+
 
 
 @section('page_title')
@@ -26,46 +28,68 @@
 
 <div class="row">
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="ion ion-ios-people-outline"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Clients</span>
-                    <span class="info-box-number">{{ $client->count() }}</span>
-                </div>
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+              <span class="info-box-icon bg-info">
+                  <i class="ion ion-ios-people-outline"></i>
+              </span>
+              <div class="info-box-content">
+                  <span class="info-box-text">Users</span>
+                  <span class="info-box-number">{{ $users->count() }}</span>
+              </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+            <span class="info-box-icon bg-info">
+               <i class="ion ion-ios-people-outline"></i>
+            </span>
+            <div class="info-box-content">
+                <span class="info-box-text">Clients</span>
+                 <span class="info-box-number">{{ $client->count() }}</span>
+            </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+          <span class="info-box-icon bg-red">
+              <i class="fas fa-plus-circle" ></i>
+          </span>
+          <div class="info-box-content">
+              <span class="info-box-text">Donation Requests</span>
+              <span class="info-box-number">{{ $donation_requests->count() }}</span>
           </div>
+      </div>
   </div>
-
-  <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-          <span class="info-box-icon bg-red"><i class="fas fa-plus-circle" ></i></span>
-              <div class="info-box-content">
-                  <span class="info-box-text">Donation Requests</span>
-                  <span class="info-box-number">{{ $donation_requests->count() }}</span>
-              </div>
-        </div>
-  </div>
-  <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-          <span class="info-box-icon bg-green"><i class="fas fa-edit" ></i></span>
-              <div class="info-box-content">
-                  <span class="info-box-text">Posts</span>
-                  <span class="info-box-number">{{ $posts->count() }}</span>
-              </div>
-        </div>
-  </div>
-
+  
 </div>
+
 <div class="row">
 
   <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
-          <span class="info-box-icon bg-red"><i class="fas fa-plus-circle" ></i></span>
-              <div class="info-box-content">
-                  <span class="info-box-text">Governorates</span>
-                  <span class="info-box-number">{{ $governorate->count() }}</span>
-              </div>
-        </div>
+          <span class="info-box-icon bg-green">
+             <i class="fas fa-edit" ></i>
+          </span>
+          <div class="info-box-content">
+              <span class="info-box-text">Posts</span>
+              <span class="info-box-number">{{ $posts->count() }}</span>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+          <span class="info-box-icon bg-red">
+              <i class="fas fa-plus-circle" ></i>
+          </span>
+          <div class="info-box-content">
+              <span class="info-box-text">Governorates</span>
+              <span class="info-box-number">{{ $governorate->count() }}</span>
+          </div>
+      </div>
   </div>
 
   <div class="col-md-3 col-sm-6 col-xs-12">

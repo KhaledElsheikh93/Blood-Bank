@@ -37,7 +37,7 @@
                 <option value="{{$governorate->id}}">{{$governorate->name}}</option>
             @endforeach
           </select> 
-      </div>
+      </div> 
       <div class="form-group">
       {!! Form::submit('Add', [
              'class' => 'btn btn-primary'

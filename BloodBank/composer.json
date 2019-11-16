@@ -11,10 +11,11 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laracasts/flash": "^3.0",
-        "laravel/framework": "^6.0",
+        "laravel/framework": "^5.8",
         "laravel/passport": "^7.5",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^6.0"
+        "laravelcollective/html": "^5.8",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
@@ -44,8 +45,8 @@
         ],
         "files": [
             "App/Khaled/helpers.php"
-          
-        ] 
+
+        ]
     },
 
     "autoload-dev": {
