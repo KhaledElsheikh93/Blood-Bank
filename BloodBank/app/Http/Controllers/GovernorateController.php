@@ -15,7 +15,7 @@ class GovernorateController extends Controller
     public function index()
     {
         $records = Governorate::paginate(10);
-        return view('governorates.index', compact('records'));
+        return view('admin.governorates.index', compact('records'));
     }
 
     /**
@@ -25,7 +25,7 @@ class GovernorateController extends Controller
      */
     public function create()
     {
-        return view('governorates.create');
+        return view('admin.governorates.create');
     }
 
     /**
@@ -75,7 +75,7 @@ class GovernorateController extends Controller
     public function edit($id)
     {
         $model = Governorate::findOrfail($id);
-        return view('governorates.edit',compact('model'));
+        return view('admin.governorates.edit',compact('model'));
     }
 
     /**

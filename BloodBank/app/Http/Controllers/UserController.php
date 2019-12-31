@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use App\User;
 use App\Role;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $records = User::paginate(10);
-        return view('users.index', compact('records'));
+        return view('admin.users.index', compact('records'));
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('users.create' , compact('roles'));
+        return view('admin.users.create' , compact('roles'));
     }
 
     /**
@@ -79,7 +80,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $model = User::findOrfail($id);
-        return view('users.edit',compact('model'));
+        return view('admin.users.edit',compact('model'));
     }
 
     /**
@@ -126,6 +127,13 @@ class UserController extends Controller
         flash('Deleted')->success();
         return back();
     }
+
+
+    public function changePassword(Request $request)
+    {
+        //$model = User::findOrfail($id);
+        return view('admin.users.reset-password');
+    }
      
     // change password
     public function changePasswordSave(Request $request)
@@ -145,10 +153,10 @@ class UserController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->save();
             flash()->success('تم تحديث كلمة المرور');
-            return view('users.reset-password');
+            return redirect('admin/users/');
         }else{
             flash()->error('كلمة المرور غير صحيحة');
-            return view('users.reset-password');
+            return redirect(route('users.index'));
         }
-
+    }
 }

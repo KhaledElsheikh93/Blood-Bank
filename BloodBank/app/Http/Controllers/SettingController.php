@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -13,7 +14,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $records = Setting::all();
+        return view('admin.settings.index', compact('records'));
     }
 
     /**
@@ -23,7 +25,7 @@ class SettingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.settings.create');
     }
 
     /**
@@ -34,7 +36,31 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'notification' => 'required',
+            'settings_text'=> 'required',
+            'about_app'    => 'required',
+            'phone'        => 'required|numeric',
+            'email'        => 'required|email',
+            'fb_link'      => 'required',
+            'tw_link'      => 'required',
+            'insta_link'   => 'required'
+        ];
+        $messages = [
+            'notification.required' => ' برجاء ادخال ملاحظات',
+            'settings_text.required'=> 'برجاء ادخال البيانات',
+            'about_app.required'    => 'برجاء ادخال معلومات حول التطبيق',
+            'phone.required'        => 'برجاء ادخال رقم الهاتف',
+            'email.required'        => 'برجاء ادخال ايمييل التطبيق',
+            'fb_link.required'      => 'برجاء ادخال رابط حسابك علي الفيس بوك',
+            'tw_link.required'      => 'برجاء ادخال رابط تويتر',
+            'insta_link.required'   => 'برجاء ادخال رابط حسابك علي انستغرام' 
+
+        ];
+        $this->validate($request, $rules, $messages);
+        $record = Setting::create($request->all());
+        flash('settings have been added')->success();
+        return redirect(route('settings.index'));
     }
 
     /**
@@ -56,7 +82,8 @@ class SettingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Setting::findOrfail($id);
+        return view('admin.settings.edit', compact('model'));
     }
 
     /**
@@ -68,7 +95,32 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'notification' => 'required',
+            'settings_text'=> 'required',
+            'about_app'    => 'required',
+            'phone'        => 'required|numeric',
+            'email'        => 'required|email',
+            'fb_link'      => 'required',
+            'tw_link'      => 'required',
+            'insta_link'      => 'required'
+        ];
+        $messages = [
+            'notification.required' => ' برجاء ادخال ملاحظات',
+            'settings_text.required'=> 'برجاء ادخال البيانات',
+            'about_app.required'    => 'برجاء ادخال معلومات حول التطبيق',
+            'phone.required'        => 'برجاء ادخال رقم الهاتف',
+            'email.required'        => 'برجاء ادخال ايمييل التطبيق',
+            'fb_link.required'      => 'برجاء ادخال رابط حسابك علي الفيس بوك',
+            'tw_link.required'      => 'برجاء ادخال رابط تويتر',
+            'insta_link.required'   => 'برجاء ادخال رابط حسابك علي انستغرام' 
+
+        ];
+        $this->validate($request, $rules, $messages);
+        $record = Setting::findOrfail($id);
+        $record->update($request->all());
+        flash('Settings Edited')->success();
+        return redirect(route('settings.index'));
     }
 
     /**
@@ -79,6 +131,9 @@ class SettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $record = Setting::findOrfail($id);
+        $record->delete();
+        flash('Deleted')->success();
+        return back();
     }
 }

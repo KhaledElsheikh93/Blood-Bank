@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
            $records = Category::paginate(10);
-           return view('categories.index', compact('records'));
+           return view('admin.categories.index', compact('records'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $model = Category::findOrfail($id);
-        return view('categories.edit',compact('model'));
+        return view('admin.categories.edit',compact('model'));
     }
 
     /**

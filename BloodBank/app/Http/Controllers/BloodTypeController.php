@@ -15,7 +15,7 @@ class BloodTypeController extends Controller
     public function index()
     {
         $records = BloodType::paginate(10);
-        return view('blood_types.index', compact('records'));
+        return view('admin.blood_types.index', compact('records'));
     }
 
     /**
@@ -25,7 +25,7 @@ class BloodTypeController extends Controller
      */
     public function create()
     {
-        return view('blood_types.create');
+        return view('admin.blood_types.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class BloodTypeController extends Controller
     public function edit($id)
     {
         $model = BloodType::findOrfail($id);
-        return view('blood_types.edit', compact('model'));
+        return view('admin.blood_types.edit', compact('model'));
     }
 
     /**

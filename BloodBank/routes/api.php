@@ -34,7 +34,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'],function(){
         Route::post('edit-profile', 'MainController@editProfile');
         Route::post('update-notification-settings', 'MainController@updateNotificationSettings');
         Route::post('toggle-favourite', 'MainController@toggleFavourite');
-    
+        Route::get('profile', 'MainController@profile');
     });
     
    

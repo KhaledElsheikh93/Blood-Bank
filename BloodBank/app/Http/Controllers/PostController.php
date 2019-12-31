@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
 {
@@ -16,7 +18,7 @@ class PostController extends Controller
     public function index()
     {
         $records = Post::paginate(10);
-        return view('posts.index',compact('records'));
+        return view('admin.posts.index',compact('records'));
     }
 
     /**
@@ -27,7 +29,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('posts.create'  , compact('categories'));
+        return view('admin.posts.create'  , compact('categories'));
     }
 
     /**
@@ -41,7 +43,8 @@ class PostController extends Controller
         $rules = [
             'title'           => 'required',
             'category_id'     => 'required',
-            'content'         => 'required'
+            'content'         => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|max:10000'
         ];
 
         $message = [
@@ -51,7 +54,13 @@ class PostController extends Controller
         ];
 
         $this->validate($request, $rules, $message);
+        $img = $request->file('image');
+        $extention = $img->getClientOriginalExtension();
+        $name = Str::random(10).'.'.$extention;
+        $img->move(public_path().'/front/imgs/posts/', $name);
         $records = Post::create($request->all());
+        $records->image = 'front/imgs/posts/' . $name;
+        $records->save(); 
         flash("Your Post has been added")->success();
         return redirect(route('posts.index'));
     }
@@ -76,9 +85,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $model = Post::findOrfail($id);
-        
+        //dd($model);
         $categories = Category::all();
-        return view('posts.edit'  , compact(['model', 'categories']));
+        return view('admin.posts.edit', compact('model', 'categories'));
     }
 
     /**
@@ -93,7 +102,8 @@ class PostController extends Controller
         $rules = [
             'title'           => 'required',
             'category_id'     => 'required',
-            'content'         => 'required'
+            'content'         => 'required',
+            'image'           => 'required|mimes:jpeg,jpg,png,gif|max:10000'
         ];
 
         $message = [
@@ -103,9 +113,17 @@ class PostController extends Controller
         ];
 
         $this->validate($request, $rules, $message);
-        
         $record = Post::findOrfail($id);
         $record->update($request->all());
+        if($request->has('image'))
+        {
+          $img = $request->file('image');
+          $extention = $img->getClientOriginalExtension();
+          $name =  Str::random(20) .'.'. $extention;
+          $img->move(public_path().'/front/imgs/posts/' , $name);
+          $record->image = 'front/imgs/posts/' . $name;
+          $record->save();
+        }
         flash('Post Edited')->success();
         return redirect(route('posts.index'));
     }

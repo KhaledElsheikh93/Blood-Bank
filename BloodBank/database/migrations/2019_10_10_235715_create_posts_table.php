@@ -14,6 +14,7 @@ class CreatePostsTable extends Migration {
 			$table->string('image');
 			$table->text('content');
 			$table->integer('category_id')->unsigned();
+			$table->date('publish_date');
 		});
 	}
 

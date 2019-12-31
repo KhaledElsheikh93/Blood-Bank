@@ -15,7 +15,7 @@ class DonationRequestController extends Controller
     public function index()
     {
         $records = DonationRequest::paginate(10);
-        return view('donation_requests.index', compact('records'));
+        return view('admin.donation_requests.index', compact('records'));
     }
 
     /**

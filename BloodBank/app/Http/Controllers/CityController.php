@@ -16,7 +16,7 @@ class CityController extends Controller
     public function index()
     {
        $records = City::paginate(10);
-       return view('cities.index',compact('records'));
+       return view('admin.cities.index',compact('records'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CityController extends Controller
     public function create()
     {
         $governorates = Governorate::all();
-        return view('cities.create'  , compact('governorates'));
+        return view('admin.cities.create'  , compact('governorates'));
     }
 
     /**
@@ -78,7 +78,7 @@ class CityController extends Controller
     {
         $model = City::findOrfail($id);
         $governorates = Governorate::all();
-        return view('cities.edit'  , compact(['model', 'governorates']));
+        return view('admin.cities.edit'  , compact(['model', 'governorates']));
     }
 
     /**

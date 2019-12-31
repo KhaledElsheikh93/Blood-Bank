@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $records = Client::paginate(10);
-        return view('clients.index', compact('records'));
+        return view('admin.clients.index', compact('records'));
     }
 
     /**

@@ -57,12 +57,8 @@ class MainController extends Controller
 
     public function profile(Request $request)
     {
-        $client = Client::where(function($query) use($request){
-            if($request->has('api_token'))
-            {
-                $query->where('api_token', $request ->api_token);
-            }
-        })->get();
+        $client = $request->user();
+        
         return responseJson(1, "success", $client);
         
     }
@@ -78,16 +74,16 @@ class MainController extends Controller
             'last_donation_date' => 'required',
             'city_id'            => 'required',
             'phone'              => 'required',
-            'password'           => 'required|confirmed',
+            'password'           => 'required',
         ]);
         if($validation->fails())
         {
             return responseJson(0, "validation error", $validator->errors());
         }
-        $request->merge(['password' => Hash::make($request->password)]);
-        $client = $request->user()
+       
+        $request->merge(['password', Hash::make($request->password)]);
+        $client = Client::where('api_token', $request->api_token)->first()
         ->update($request->all());
-        
         return responseJson(1, "updated succefully", $client); 
     }
 

@@ -40,7 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        'site_client' => [
+            'driver' => 'session',
+            'provider' => 'site_clients',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'clients',
@@ -71,6 +74,10 @@ return [
             'model' => App\User::class,
         ],
         'clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Client::class,
+        ],
+        'site_clients' => [
             'driver' => 'eloquent',
             'model' => App\Models\Client::class,
         ],

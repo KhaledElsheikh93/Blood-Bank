@@ -34,7 +34,7 @@ class AuthController extends Controller
         $request->merge(['password' => Hash::make($request->password)]);
         $client = Client::create($request->all());
         $client->api_token = Str::random(60);
-        $client->pin_code = Str::random(6);
+        $client->pin_code  = Str::random(6);
         $client->save();
         return responseJson(1, "success", [
             'api_token' => $client->api_token,
